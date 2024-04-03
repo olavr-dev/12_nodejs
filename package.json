@@ -1,0 +1,18 @@
+{
+  "name": "12_nodejs",
+  "version": "1.0.0",
+  "description": "Getting started with Node & Express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/olavr-dev/12_nodejs.git"
+  },
+  "author": "Olav Oye Rorvik",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
