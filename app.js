@@ -1,3 +1,6 @@
+const fileSystem = require('fs');
+const path = require('path');
+
 const express = require('express');
 
 const app = express();
@@ -16,8 +19,34 @@ app.get('/', function (request, response) {
 
 app.post('/store-user', function (request, response) {
   const userName = request.body.username;
-  console.log(userName);
+
+  const filePath = path.join(__dirname, 'data', 'users.json');
+
+  const fileData = fileSystem.readFileSync(filePath);
+  const existingUsers = JSON.parse(fileData);
+
+  existingUsers.push(userName);
+
+  fileSystem.writeFileSync(filePath, JSON.stringify(existingUsers));
+
   response.send('<h1>Username Stored!</h1>');
+});
+
+app.get('/users', function (request, response) {
+  const filePath = path.join(__dirname, 'data', 'users.json');
+
+  const fileData = fileSystem.readFileSync(filePath);
+  const existingUsers = JSON.parse(fileData);
+
+  let responseData = '<ul>';
+
+  for (const user of existingUsers) {
+    responseData += '<li>' + user + '</li>';
+  }
+
+  responseData += '</ul>';
+
+  response.send(responseData);
 });
 
 app.listen(3000);
